@@ -417,7 +417,7 @@ if(!function_exists('in_arrayi')) {
  *
  * @since 2.0
  * @uses $PRETTYURLS
- * @uses $SITEURL
+ * @uses $fullpath
  * @uses $PERMALINK
  * @uses tsl
  *
@@ -428,11 +428,11 @@ if(!function_exists('in_arrayi')) {
  */
 function find_url($slug, $parent, $type='full') {
 	global $PRETTYURLS;
-	global $SITEURL;
+	global $fullpath;
 	global $PERMALINK;
 				
 	if ($type == 'full') {
-		$full = $SITEURL;
+		$full = $fullpath;
 	} elseif($type == 'relative') {
 		$s = pathinfo(htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES));
 		$full = $s['dirname'] .'/';
