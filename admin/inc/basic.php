@@ -820,11 +820,11 @@ function suggest_site_path($parts=false, $protocolRelative = false) {
 	
 	if($path_parts == '/') {
 	
-		$fullpath = $protocol."//". htmlentities($_SERVER['SERVER_NAME'], ENT_QUOTES) . $port . "/";
+		$fullpath = $protocol."//". htmlentities($_SERVER['HTTP_HOST'], ENT_QUOTES) . $port . "/";
 	
 	} else {
 		
-		$fullpath = $protocol."//". htmlentities($_SERVER['SERVER_NAME'], ENT_QUOTES) . $port . $path_parts ."/";
+		$fullpath = $protocol."//". htmlentities($_SERVER['HTTP_HOST'], ENT_QUOTES) . $port . $path_parts ."/";
 		
 	}
 		
