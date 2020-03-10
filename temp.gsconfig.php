@@ -15,6 +15,12 @@ if (basename($_SERVER['PHP_SELF']) == 'gsconfig.php') {
 /*****************************************************************************/
 /** Below are constants that you can use to customize how GetSimple operates */ 
 
+# Use HTTP_HOST if you have some hosts or relative host, default SERVER_NAME
+define('GSSERVERNAME', 'SERVER_NAME');
+
+# Used with HTTP_HOST for validate it
+#define('ALLOWEDHOSTS', false);
+
 # Extra salt to secure your password with. Default is empty for backwards compatibility.
 #define('GSLOGINSALT', 'your_unique_phrase');
 

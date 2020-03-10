@@ -817,14 +817,23 @@ function suggest_site_path($parts=false, $protocolRelative = false) {
 	$path_parts = pathinfo(htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES));
 	$path_parts = str_replace("/".$GSADMIN, "", $path_parts['dirname']);
 	$port       = ($p=$_SERVER['SERVER_PORT'])!='80'&&$p!='443'?':'.$p:'';
+    $host = getDef('GSSERVERNAME');
+
+    if( getDef('ALLOWEDHOSTS') ) {
+        $allowed_hosts = explode(',', getDef('ALLOWEDHOSTS'));
+        if (!isset($_SERVER['HTTP_HOST']) || !in_array($_SERVER['HTTP_HOST'], $allowed_hosts)) {
+            header('HTTP/1.1 400 Bad Request');
+            die();
+        }
+    }
 	
 	if($path_parts == '/') {
 	
-		$fullpath = $protocol."//". htmlentities($_SERVER['HTTP_HOST'], ENT_QUOTES) . $port . "/";
+		$fullpath = $protocol."//". htmlentities($_SERVER[$host], ENT_QUOTES) . $port . "/";
 	
 	} else {
 		
-		$fullpath = $protocol."//". htmlentities($_SERVER['HTTP_HOST'], ENT_QUOTES) . $port . $path_parts ."/";
+		$fullpath = $protocol."//". htmlentities($_SERVER[$host], ENT_QUOTES) . $port . $path_parts ."/";
 		
 	}
 		
